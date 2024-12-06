@@ -23,7 +23,7 @@ export class UserService {
 		return this._buildUserResponse(newUser);
 	}
 
-	async login(userDto: LoginDto) {
+	async login(userDto: LoginDto): Promise<UserResponseObject> {
 		const user = await this._userModel.findOne({ email: userDto.email }).select('+password');
 		if(!user) {
 			throw new NotFoundException('User not found.');
@@ -35,6 +35,11 @@ export class UserService {
 		}
 
 		return this._buildUserResponse(user, true);
+	}
+
+	async getUserByEmail(email: string): Promise<UserResponseObject> {
+		const user = await this._userModel.findOne({ email: email });
+		return this._buildUserResponse(user);
 	}
 
 	private _buildUserResponse(user: UserEntity, isAuth: boolean = false): UserResponseObject {
