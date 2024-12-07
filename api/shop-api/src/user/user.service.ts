@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserEntity, UserEntitySchema } from './user.entity';
+import { UserEntity } from './user.entity';
 import { Model } from 'mongoose';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { UserResponseObject } from 'src/interfaces/userResponse.interface';
@@ -10,10 +10,10 @@ import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserService {
-	constructor(@InjectModel(UserEntity.name) private _userModel: Model<UserEntity>, private _jwtService: JwtService) {}
+	constructor(@InjectModel(UserEntity.name) private _userModel: Model<UserEntity>, private _jwtService: JwtService) { }
 
 	async createUser(userDto: CreateUserDto): Promise<UserResponseObject> {
-		const existingUser = await this._userModel.findOne({ email: userDto.email});
+		const existingUser = await this._userModel.findOne({ email: userDto.email });
 		if (existingUser) {
 			throw new UnprocessableEntityException('Email is already taken');
 		}
@@ -25,12 +25,12 @@ export class UserService {
 
 	async login(userDto: LoginDto): Promise<UserResponseObject> {
 		const user = await this._userModel.findOne({ email: userDto.email }).select('+password');
-		if(!user) {
+		if (!user) {
 			throw new NotFoundException('User not found.');
 		}
 
 		const isCorrectPassword = await compare(userDto.password, user.password);
-		if(!isCorrectPassword) {
+		if (!isCorrectPassword) {
 			throw new NotFoundException('User not found.');
 		}
 
@@ -43,11 +43,16 @@ export class UserService {
 	}
 
 	private _buildUserResponse(user: UserEntity, isAuth: boolean = false): UserResponseObject {
-		return {
+		const responseObject: UserResponseObject = {
 			email: user.email,
 			username: user.email,
-			token: isAuth ? this._generateToken(user) : null,
 		}
+
+		if (isAuth) {
+			responseObject.token = this._generateToken(user)
+		}
+
+		return responseObject;
 	}
 
 	private _generateToken(user: UserEntity): string {

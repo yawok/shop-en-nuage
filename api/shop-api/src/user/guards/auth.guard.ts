@@ -15,21 +15,23 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request: AuthenticatedReqeust = context.switchToHttp().getRequest();
     const isPublic = this._reflector.getAllAndOverride<string>(
-      IS_PUBLICLY_ACCESSIBLE, 
+      IS_PUBLICLY_ACCESSIBLE,
       [context.getHandler(), context.getClass()]
     );
 
-    if (isPublic) { 
+    if (isPublic) {
       return true;
     }
-    
+
+    const request: AuthenticatedReqeust = context.switchToHttp().getRequest();
+
     const authToken = this._extractTokenFromHeader(request);
 
     if (authToken) {
       try {
-        const email = await this._jwtService.verifyAsync(authToken);
+        const payload = await this._jwtService.verifyAsync(authToken);
+        const email: string = payload.email;
         const user = await this._userService.getUserByEmail(email);
 
         if (!user) {
@@ -46,7 +48,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private _extractTokenFromHeader(request: Request): string | null {
-    const [type, token] = request.headers.authorization?.split[' '] ?? [];
+    const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : null;
   }
 }
