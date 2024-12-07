@@ -9,10 +9,10 @@ export class UserEntity {
 	@Prop({type: String})
 	email: string;
 
-	@Prop({type: String})
+	@Prop({type: String, select: false})
 	password: string;
 
-	@Prop({type: String, select: false})
+	@Prop({type: String, select: false, default: new Date().toUTCString()})
 	createdAt: string;
 }
 
