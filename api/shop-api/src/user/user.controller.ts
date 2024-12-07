@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post, Req} from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './dtos/createUser.dto';
-import { LoginDto } from './dtos/login.dto';
+import { CreateUserDto } from './dto/createUser.dto';
+import { LoginDto } from './dto/login.dto';
 import { UserResponseObject } from 'src/interfaces/userResponse.interface';
 import { Public } from './decorators/authExempt.decorator';
 import { AuthenticatedReqeust } from 'src/interfaces/authenticatedRequest.interface';

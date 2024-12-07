@@ -4,7 +4,7 @@ import { UserController } from './user.controller';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
 import { MongooseModule } from '@nestjs/mongoose';
-import { UserEntity, UserEntitySchema } from './user.entity';
+import { UserEntity, UserEntitySchema } from './entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtConfig } from 'src/config/jwt.config';
 

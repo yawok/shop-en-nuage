@@ -1,10 +1,10 @@
 import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserEntity } from './user.entity';
+import { UserEntity } from './entities/user.entity';
 import { Model } from 'mongoose';
-import { CreateUserDto } from './dtos/createUser.dto';
+import { CreateUserDto } from './dto/createUser.dto';
 import { UserResponseObject } from 'src/interfaces/userResponse.interface';
-import { LoginDto } from './dtos/login.dto';
+import { LoginDto } from './dto/login.dto';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 
