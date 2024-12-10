@@ -15,5 +15,6 @@ import { JwtConfig } from 'src/config/jwt.config';
   ],
   controllers: [UserController],
   providers: [UserService, { provide: APP_GUARD, useClass: AuthGuard }],
+  exports: [UserService]
 })
 export class UserModule { }
