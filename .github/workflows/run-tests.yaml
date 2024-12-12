@@ -1,0 +1,21 @@
+name: Tests
+
+on:
+    push:
+        branches:
+          - main
+    pull_request:
+        branches:
+          - main
+
+jobs:
+    api-test:
+        name: 'API Test'
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+            
+            - name: Log Message to Console
+              run: echo "No tests added yet."
