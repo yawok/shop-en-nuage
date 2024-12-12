@@ -10,7 +10,7 @@ on:
 
 jobs:
     api-test:
-        name: 'Tests'
+        name: 'API Test'
         runs-on: ubuntu-latest
 
         steps:
