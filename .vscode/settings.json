@@ -1,0 +1,5 @@
+{
+    "terraform.codelens.referenceCount": false,
+    "terraform.languageServer.enable": false,
+    "terraform.validation.enableEnhancedValidation": false
+}
