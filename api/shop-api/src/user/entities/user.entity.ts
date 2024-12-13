@@ -2,29 +2,26 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { hash } from "bcrypt";
 import { Basket } from "src/basket/entities/basket.entity";
 import { addCreatedAt } from "src/helpers/createdAt.helper";
+import { IBasket } from "src/interfaces/basket.interface";
 
-@Schema()
+@Schema({ timestamps: true })
 export class UserEntity {
-	@Prop({type: String})
+	@Prop({ type: String })
 	username: string;
 
-	@Prop({type: String})
+	@Prop({ type: String })
 	email: string;
 
-	@Prop({type: String, select: false})
+	@Prop({ type: String, select: false })
 	password: string;
 
 	@Prop({ type: Basket })
-	basket: Basket;
-
-	@Prop({type: String, select: false, default: new Date().toTimeString()})
-	createdAt: string;
+	basket: IBasket;
 }
 
 export const UserEntitySchema = SchemaFactory.createForClass(UserEntity);
 
-UserEntitySchema.pre<UserEntity>('save', hashPassword )
-UserEntitySchema.pre<UserEntity>('save', (next: Function) => addCreatedAt(next, UserEntity))
+UserEntitySchema.pre<UserEntity>('save', hashPassword)
 
 async function hashPassword(next: Function) {
 	this.password = await hash(this.password, 10);
