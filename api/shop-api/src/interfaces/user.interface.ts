@@ -2,7 +2,7 @@ import { Types } from "mongoose";
 import { IBasket } from "./basket.interface";
 
 export interface IUser { 
-	id: Types.ObjectId;
+	id?: Types.ObjectId;
 	username: string;
 	email: string;
 	createdAt: string;
