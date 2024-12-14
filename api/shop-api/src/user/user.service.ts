@@ -7,10 +7,17 @@ import { UserResponseObject } from 'src/interfaces/userResponse.interface';
 import { LoginDto } from './dto/login.dto';
 import { compare } from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
+import { IUser } from 'src/interfaces/user.interface';
+import { BasketService } from 'src/basket/basket.service';
+import { IBasket } from 'src/interfaces/basket.interface';
 
 @Injectable()
 export class UserService {
-	constructor(@InjectModel(UserEntity.name) private _userModel: Model<UserEntity>, private _jwtService: JwtService) { }
+	constructor(
+		@InjectModel(UserEntity.name) private _userModel: Model<UserEntity>, 
+		private _jwtService: JwtService,
+		private _basketService: BasketService
+	) { }
 
 	async createUser(userDto: CreateUserDto): Promise<UserResponseObject> {
 		const existingUser = await this._userModel.findOne({ email: userDto.email });
@@ -19,6 +26,8 @@ export class UserService {
 		}
 
 		const newUser = await this._userModel.create(userDto);
+		newUser.basket = await this._basketService.create();
+		newUser.save();
 
 		return this._buildUserResponse(newUser);
 	}
@@ -37,15 +46,21 @@ export class UserService {
 		return this._buildUserResponse(user, true);
 	}
 
-	async getUserByEmail(email: string): Promise<UserResponseObject> {
+	async getUserByEmail(email: string): Promise<IUser> {
+		const user: IUser = await this._userModel.findOne({ email: email });
+		return user;
+	}
+
+	async addBasket(basket: IBasket, email: string): Promise<IUser> {
 		const user = await this._userModel.findOne({ email: email });
-		return this._buildUserResponse(user);
+		user.basket = basket;
+		return await user.updateOne();
 	}
 
 	private _buildUserResponse(user: UserEntity, isAuth: boolean = false): UserResponseObject {
 		const responseObject: UserResponseObject = {
 			email: user.email,
-			username: user.email,
+			username: user.username,
 		}
 
 		if (isAuth) {
