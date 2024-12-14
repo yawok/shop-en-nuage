@@ -1,5 +1,5 @@
 output "cosmosdb_connection_string" {
-  value     = data.azurerm_cosmosdb_account_keys.main.primary_master_key
+  value     = azurerm_cosmosdb_account.main.primary_sql_connection_string
   sensitive = true
 }
 
