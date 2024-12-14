@@ -1,0 +1,5 @@
+subscription_id     = "0dd87c83-0f86-4a88-ba31-0c63b7da412b"
+location           = "francecentral"
+resource_group_name = "MyresourceGroup"
+environment        = "dev"
+project_prefix     = "shop-en-nuage"
