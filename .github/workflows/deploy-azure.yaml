@@ -46,7 +46,7 @@ jobs:
         run: terraform -chdir=./infrastructure validate
 
       - name: Terraform Plan
-        run: terraform -chdir=./infrastructure plan -out=plan.tfplan -var=${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: terraform -chdir=./infrastructure plan -out=plan.tfplan -var="subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}"
 
       - name: Upload Plan Artifact
         uses: actions/upload-artifact@v3
