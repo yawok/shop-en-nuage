@@ -1,8 +1,3 @@
-data "azurerm_cosmosdb_account" "main" {
-  name                = "${var.project_prefix}-db"
-  resource_group_name = var.resource_group_name
-}
-
 resource "azurerm_cosmosdb_account" "main" {
   name                      = "${var.project_prefix}-db"
   location                  = var.location
