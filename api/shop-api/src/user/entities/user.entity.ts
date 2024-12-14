@@ -1,10 +1,9 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { hash } from "bcrypt";
 import { Basket } from "src/basket/entities/basket.entity";
-import { addCreatedAt } from "src/helpers/createdAt.helper";
 import { IBasket } from "src/interfaces/basket.interface";
 
-@Schema({ timestamps: true })
+@Schema({ timestamps: true, id: true })
 export class UserEntity {
 	@Prop({ type: String })
 	username: string;
