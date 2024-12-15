@@ -14,5 +14,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       
-      - name: Log Message to Console
-        run: echo "No tests added yet."
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      
+      - name: Install Dependencies
+        run: |
+          cd api/shop-api
+          npm install
+
+      - name: Run Tests
+        run: |
+          cd api/shop-api
+          npm test
