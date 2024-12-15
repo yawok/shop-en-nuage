@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { UserService } from '../user.service';
-import { AuthenticatedReqeust } from 'src/interfaces/authenticatedRequest.interface';
+import { AuthenticatedReqeust } from '../../interfaces/authenticatedRequest.interface';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLICLY_ACCESSIBLE } from '../decorators/authExempt.decorator';
 

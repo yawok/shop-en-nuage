@@ -1,6 +1,10 @@
-import { Types } from "mongoose";
-import { Basket } from "src/basket/entities/basket.entity";
+import { Document, Types } from "mongoose";
+import { IItem } from "./item.interface";
 
-export interface IBasket extends Basket { 
-	_id: Types.ObjectId
+export interface IBasket extends Document { 
+	_id: Types.ObjectId,
+	items: IItem[],
+	createdAt: Date,
+	updatedAt: Date,
+	__v: number
 }

@@ -1,8 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { hash } from "bcrypt";
-import { Types } from "mongoose";
-import { Basket } from "src/basket/entities/basket.entity";
-import { IBasket } from "src/interfaces/basket.interface";
+import { Types } from 'mongoose';
+import { Basket } from "../../basket/entities/basket.entity";
 
 @Schema({ timestamps: true, id: true })
 export class UserEntity {
@@ -16,7 +15,7 @@ export class UserEntity {
 	password: string;
 
 	@Prop({ type: Types.ObjectId, ref: Basket.name })
-	basket: Basket;
+	basket: Types.ObjectId;
 }
 
 export const UserEntitySchema = SchemaFactory.createForClass(UserEntity);

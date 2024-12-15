@@ -2,8 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Req } from '@nestjs/
 import { ItemService } from './item.service';
 import { CreateItemDto } from './dto/create-item.dto';
 import { UpdateItemDto } from './dto/update-item.dto';
-import { IItem } from 'src/interfaces/item.interface';
-import { AuthenticatedReqeust } from 'src/interfaces/authenticatedRequest.interface';
+import { IItem } from '../interfaces/item.interface';
+import { AuthenticatedReqeust } from '../interfaces/authenticatedRequest.interface';
 
 @Controller('item')
 export class ItemController {
