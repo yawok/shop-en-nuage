@@ -7,6 +7,8 @@ import { DatabaseConfig } from './config/database.config';
 import { UserModule } from './user/user.module';
 import { ItemModule } from './item/item.module';
 import { BasketModule } from './basket/basket.module';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtConfig } from './config/jwt.config';
 
 @Module({
   imports: [
@@ -17,6 +19,7 @@ import { BasketModule } from './basket/basket.module';
     UserModule,
     ItemModule,
     BasketModule
+    JwtModule.registerAsync({ useClass: JwtConfig }),
   ],
   controllers: [AppController],
   providers: [AppService],
