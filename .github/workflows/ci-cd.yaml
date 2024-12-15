@@ -95,5 +95,5 @@ jobs:
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'your-app-service-name'
+          app-name: 'shop-en-nuage-app'
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
