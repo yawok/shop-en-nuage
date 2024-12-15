@@ -16,7 +16,6 @@ export class BasketService {
 
   async myBasket(user: IUser): Promise<any> {
     let basket = await user.basket.populate('items');
-    console.log(basket.id)
     return basket;
   }
   

@@ -43,7 +43,6 @@ export class ItemService {
   async addToBasket(id: string, user: IUser): Promise<any> {
     const item = await this.findOne(id);
     const basketId = user.basket._id;
-    console.log(basketId)
     return this._basketService.addItem(item._id, basketId);
   }
 }
