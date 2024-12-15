@@ -1,10 +1,8 @@
-// src/user/guards/auth.guard.ts
-
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request } from 'express';
 import { UserService } from '../user.service';
-import { AuthenticatedReqeust } from '../../interfaces/authenticatedRequest.interface';
+import { AuthenticatedReqeust } from 'src/interfaces/authenticatedRequest.interface';
 import { Reflector } from '@nestjs/core';
 import { IS_PUBLICLY_ACCESSIBLE } from '../decorators/authExempt.decorator';
 
@@ -17,21 +15,22 @@ export class AuthGuard implements CanActivate {
   ) { }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const request: AuthenticatedReqeust = context.switchToHttp().getRequest();
     const isPublic = this._reflector.getAllAndOverride<string>(
-      IS_PUBLICLY_ACCESSIBLE, 
+      IS_PUBLICLY_ACCESSIBLE,
       [context.getHandler(), context.getClass()]
     );
 
-    if (isPublic) { 
+    if (isPublic) {
       return true;
     }
-    
+
+    const request: AuthenticatedReqeust = context.switchToHttp().getRequest();
     const authToken = this._extractTokenFromHeader(request);
 
     if (authToken) {
       try {
-        const email = await this._jwtService.verifyAsync(authToken);
+        const payload = await this._jwtService.verifyAsync(authToken);
+        const email: string = payload.email;
         const user = await this._userService.getUserByEmail(email);
 
         if (!user) {

@@ -1,6 +1,6 @@
 import { Request } from "express";
-import { UserResponseObject } from "./userResponse.interface";
+import { IUser } from "./user.interface";
 
 export interface AuthenticatedReqeust extends Request {
-	user: UserResponseObject;
+	user: IUser;
 }

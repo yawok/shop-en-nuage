@@ -1,16 +1,22 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
-import { JwtModule } from '@nestjs/jwt';
 import { UserService } from './user.service';
+import { UserController } from './user.controller';
+import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards/auth.guard';
-import { UserEntity, UserEntitySchema } from './user.entity';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserEntity, UserEntitySchema } from './entities/user.entity';
+import { JwtModule } from '@nestjs/jwt';
+import { JwtConfig } from 'src/config/jwt.config';
+import { BasketModule } from 'src/basket/basket.module';
 
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: UserEntity.name, schema: UserEntitySchema }]),
-    JwtModule,
+    JwtModule.registerAsync({ useClass: JwtConfig }),
+    BasketModule
   ],
-  providers: [UserService, AuthGuard],
-  exports: [UserService, AuthGuard],
+  controllers: [UserController],
+  providers: [UserService, { provide: APP_GUARD, useClass: AuthGuard }],
+  exports: [UserService]
 })
-export class UserModule {}
+export class UserModule { }
