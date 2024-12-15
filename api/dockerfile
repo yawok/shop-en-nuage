@@ -8,11 +8,11 @@ ENV JWT_SECRET=${JWT_SECRET}
 
 WORKDIR /app
 
-COPY api/shop-api/package*.json tsconfig.json ./
+COPY shop-api/package*.json shop-api/tsconfig.json ./
 
 RUN npm install
 
-COPY api/shop-api/src/ ./src/
+COPY shop-api/src/ ./src/
 
 RUN npm run build
 
