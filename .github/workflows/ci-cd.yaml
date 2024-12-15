@@ -59,7 +59,8 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=sha,format=short
+            sha-${{ github.sha }}
+            type=sha,format=long
             type=ref,event=branch, pattern=main
             type=semver,pattern={{version}}
 
@@ -99,9 +100,12 @@ jobs:
       - name: Set Environment Variables on Azure App Service
         run: |
           az webapp config appsettings set \
-          --name 'shop-en-nuage-app' \
-          --resource-group 'MyResourceGroup' \
-          --settings DB_URI=${{ secrets.DB_URI }} JWT_SECRET=${{ secrets.JWT_SECRET }}
+            --name 'shop-en-nuage-app' \
+            --resource-group 'MyResourceGroup' \
+            --settings DB_URI=${{ secrets.DB_URI }} JWT_SECRET=${{ secrets.JWT_SECRET }} \
+            --docker-registry-server-url https://ghcr.io \
+            --docker-registry-server-user ${{ github.actor }} \
+            --docker-registry-server-password ${{ secrets.REPO_TOKEN }}
 
       - name: Deploy to Azure App Service
         uses: azure/webapps-deploy@v2
