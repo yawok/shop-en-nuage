@@ -100,11 +100,11 @@ jobs:
       - name: Set Environment Variables on Azure App Service
         run: |
           az webapp config container set \
-            --name 'shop-en-nuage-app' \
-            --resource-group 'MyResourceGroup' \
+            --name shop-en-nuage-app \
+            --resource-group MyResourceGroup \
             --settings DB_URI=${{ secrets.DB_URI }} JWT_SECRET=${{ secrets.JWT_SECRET }} \
             --docker-registry-server-url https://ghcr.io \
-            --docker-registry-server-user ${{ github.actor }} \
+            --docker-registry-server-username ${{ github.actor }} \
             --docker-registry-server-password ${{ secrets.REPO_TOKEN }}
 
       - name: Deploy to Azure App Service
