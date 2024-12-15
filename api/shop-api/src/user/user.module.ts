@@ -6,8 +6,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserEntity, UserEntitySchema } from './entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
-import { JwtConfig } from 'src/config/jwt.config';
-import { BasketModule } from 'src/basket/basket.module';
+import { JwtConfig } from '../config/jwt.config';
+import { BasketModule } from '../basket/basket.module';
 
 @Module({
   imports: [

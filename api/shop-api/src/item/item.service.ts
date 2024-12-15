@@ -4,18 +4,16 @@ import { UpdateItemDto } from './dto/update-item.dto';
 import { InjectModel } from '@nestjs/mongoose';
 import { Item } from './entities/item.entity';
 import { Model } from 'mongoose';
-import { IItem } from 'src/interfaces/item.interface';
-import { BasketService } from 'src/basket/basket.service';
-import { UserService } from 'src/user/user.service';
-import { IUser } from 'src/interfaces/user.interface';
+import { IItem } from '../interfaces/item.interface';
+import { BasketService } from '../basket/basket.service';
+import { IUser } from '../interfaces/user.interface';
 
 @Injectable()
 export class ItemService {
   constructor(
     @InjectModel(Item.name) private _itemModel: Model<Item>,
-    private _basketService: BasketService, 
-    private _userService: UserService
-) { }
+    private _basketService: BasketService
+  ) { }
 
   async create(createItemDto: CreateItemDto): Promise<IItem> {
     const newItem = await this._itemModel.create(createItemDto);

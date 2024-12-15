@@ -5,10 +5,16 @@ import { ItemService } from './item.service';
 describe('ItemController', () => {
   let controller: ItemController;
 
+  const mockItemService = {
+    create: jest.fn()
+  }
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [ItemController],
-      providers: [ItemService],
+      providers: [
+        { provide: ItemService, useValue: mockItemService }
+      ],
     }).compile();
 
     controller = module.get<ItemController>(ItemController);

@@ -2,9 +2,9 @@ import { Body, Controller, Get, Post, Req} from '@nestjs/common';
 import { UserService } from './user.service';
 import { CreateUserDto } from './dto/createUser.dto';
 import { LoginDto } from './dto/login.dto';
-import { UserResponseObject } from 'src/interfaces/userResponse.interface';
+import { UserResponseObject } from '../interfaces/userResponse.interface';
 import { Public } from './decorators/authExempt.decorator';
-import { AuthenticatedReqeust } from 'src/interfaces/authenticatedRequest.interface';
+import { AuthenticatedReqeust } from '../interfaces/authenticatedRequest.interface';
 
 @Controller('user')
 export class UserController {
