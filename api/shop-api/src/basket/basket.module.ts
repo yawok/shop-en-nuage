@@ -10,9 +10,9 @@ import { UserModule } from 'src/user/user.module';
     MongooseModule.forFeature(
       [{ name: Basket.name, schema: BasketSchema }]
     ), 
-    UserModule,
   ],
   controllers: [BasketController],
   providers: [BasketService],
+  exports: [BasketService]
 })
 export class BasketModule { }

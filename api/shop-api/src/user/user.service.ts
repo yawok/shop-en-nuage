@@ -47,7 +47,7 @@ export class UserService {
 	}
 
 	async getUserByEmail(email: string): Promise<IUser> {
-		const user: IUser = await this._userModel.findOne({ email: email });
+		let user: IUser = await (await this._userModel.findOne({ email: email })).populate('basket');
 		return user;
 	}
 

@@ -8,6 +8,6 @@ export class BasketController {
   @Get()
   findOne(@Req() request: AuthenticatedReqeust) {
     const user = request.user;
-    return this.basketService.findOne(user);
+    return this.basketService.myBasket(user);
   }
 }
