@@ -2,14 +2,21 @@
 
 This project demonstrates a simple application deployed on Azure using Terraform. Students will fork this repository to complete their assignments.
 
+      
+## Table of Contents
+
+- [Project Structure](#project-structure)
+- [API Documentation](#api-documentation)
+- [Entities](#entities)
+- [Controllers and Endpoints](#controllers-and-endpoints)
+- [Authentication Requirements](#authentication-requirements)
+- [Setup Instructions](#setup-instructions)
+
 ## Project Structure
 
 - `api/`: Contains the NestJS application code.
 - `infrastructure/`: Contains the Terraform code to provision Azure infrastructure.
 - `.github/`: Contains GitHub Actions workflows for CI/CD.
-
-## Getting Started
-...
 
 ## API Documentation
 
@@ -273,7 +280,3 @@ This API provides functionality for managing users, baskets, and items. Below is
    - Base URL: `http://localhost:3000`
 
 ---
-
-## License
-
-...
