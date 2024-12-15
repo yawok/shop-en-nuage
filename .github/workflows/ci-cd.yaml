@@ -1,7 +1,7 @@
 name: CI/CD - Shop-En-Nuage
 
 env:
-  REGISTRY: ghcir.io
+  REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
 on:
