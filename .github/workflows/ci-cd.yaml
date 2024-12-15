@@ -100,7 +100,7 @@ jobs:
         run: |
           az webapp config appsettings set \
           --name 'shop-en-nuage-app' \
-          --resource-group 'MyResourceGroup'
+          --resource-group 'MyResourceGroup' \
           --settings DB_URI=${{ secrets.DB_URI }} JWT_SECRET=${{ secrets.JWT_SECRET }}
 
       - name: Deploy to Azure App Service
