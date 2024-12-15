@@ -18,7 +18,7 @@ import { JwtConfig } from './config/jwt.config';
     }),
     UserModule,
     ItemModule,
-    BasketModule
+    BasketModule,
     JwtModule.registerAsync({ useClass: JwtConfig }),
   ],
   controllers: [AppController],

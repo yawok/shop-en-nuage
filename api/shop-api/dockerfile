@@ -1,5 +1,11 @@
 FROM node:18-alpine AS builder
 
+ARG DB_URI
+ARG JWT_SECRET
+
+ENV DB_URI=${DB_URI}
+ENV JWT_SECRET=${JWT_SECRET}
+
 WORKDIR /app
 
 COPY package*.json tsconfig.json ./
