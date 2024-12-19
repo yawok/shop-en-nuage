@@ -4,13 +4,31 @@ This project demonstrates a simple application deployed on Azure using Terraform
 
       
 ## Table of Contents
-
+- [Summary](#summary-using-the-api)
 - [Project Structure](#project-structure)
 - [API Documentation](#api-documentation)
 - [Entities](#entities)
 - [Controllers and Endpoints](#controllers-and-endpoints)
 - [Authentication Requirements](#authentication-requirements)
 - [Setup Instructions](#setup-instructions)
+
+## Summary: Using the API
+#### Base API url : https://shop-en-nuage-app.azurewebsites.net/
+
+### Route Summary
+
+| HTTP Method | Route | Description | Authentication Required |
+| -------------| ------------- | ------------- | ------------- |
+| POST | `user/` | Create new user | ❌ |
+| POST | `user/login` | Login (Get authorisation JWT) | ❌ |
+| GET | `user/profile` | Get profile detail | ✅ |
+| POST | `item` | Add a new item | ✅ |
+| GET | `item` | Get all items | ✅ |
+| GET | `item/:id` | Get item with id | ✅ |
+| GET | `item/:id/add-to-basket | Add item to my basket | ✅ |
+| PATCH | `item/:id` | Update item | ✅ |
+| DELETE | `item/:id` | Delete item | ✅ |
+| GET | `basket/` | Get my basket | ✅ |
 
 ## Project Structure
 
